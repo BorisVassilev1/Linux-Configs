@@ -1,3 +1,15 @@
+set number relativenumber
+set nu rnu
+
+syntax on
+filetype plugin indent on
+set tabstop=4
+set shiftwidth=4
+set smartindent
+set noexpandtab
+
+colorscheme default
+
 "call plug#begin()
 
 "Plug 'lambdalisue/suda.vim' 
@@ -10,13 +22,6 @@
 
 "call plug#end()
 
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set noexpandtab
-
-colorscheme default
-
 "source ~/.config/nvim/settings/coc_settings.vim
 
 "nnoremap <leader>n :NERDTreeFocus<CR>
@@ -26,13 +31,10 @@ colorscheme default
 
 
 
-" turn hybrid line numbers on
-set number relativenumber
-set nu rnu
-
 " Set scripts to be executable from the shell
 au BufWritePost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod +x <afile> | endif | endif
 
+" fix some indenting issues on lambdas
 setlocal cindent cino=j1,(0,ws,Ws
 
 set wrap
