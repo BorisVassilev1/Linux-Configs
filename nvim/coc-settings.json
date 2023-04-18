@@ -1,9 +1,0 @@
-{
-  "clangd.arguments": [
-    "--completion-style=detailed",
-    "--query-driver=/bin/g++",
-    "--background-index",
-  ],
-  "clangd.fallbackFlags" : ["-std=c++17"],
-  "inlayHint.enable": false
-}
