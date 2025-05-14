@@ -1,0 +1,291 @@
+$rosewater : #f5e0dc;
+$flamingo : #f2cdcd;
+$pink : #f5c2e7;
+$mauve : #cba6f7;
+$red : #f38ba8;
+$maroon : #eba0ac;
+$peach : #fab387;
+$yellow : #f9e2af;
+$green : #a6e3a1;
+$teal : #94e2d5;
+$sky : #89dceb;
+$sapphire : #74c7ec;
+$blue : #89b4fa;
+$lavender : #b4befe;
+$text : #cdd6f4;
+$subtext1 : #bac2de;
+$subtext0 : #a6adc8;
+$overlay2 : #9399b2;
+$overlay1 : #7f849c;
+$overlay0 : #6c7086;
+$surface2 : #585b70;
+$surface1 : #45475a;
+$surface0 : #313244;
+$base : #1e1e2e;
+$mantle : #181825;
+$crust : #11111b;
+
+$fg-color: #{"@theme_fg_color"};
+$bg-color: #{"@theme_bg_color"};
+
+//$text: $blue;
+//$texthover: $sky;
+
+$text: $peach;
+$texthover: $red;
+
+/************
+ * Calendar *
+ ************/
+
+Calendar {
+    margin: 0px 5px;
+    background: transparent;
+    button {
+        background: transparent;
+        border-radius: 60px;
+        font-size: 15px;
+    }
+    color: $maroon;
+
+    calendar {
+        //border: 1px solid rgba($sapphire, 0.5);
+        border-radius: 6px;
+        background: $crust;
+        margin: 0px 5px;
+
+        > header {
+            background: $mantle;
+            color: $text;
+            border-radius: 6px 6px 0 0;
+            font-weight: bold;
+
+            > button {
+                background: $mantle;
+                color: $text;
+                border-radius: 6px;
+
+                &:hover {
+                    background: $base;
+                    color: $texthover;
+                }
+            }
+        }
+        >grid > label {
+            background: transparent;
+            color: $text;
+            border-radius: 6px;
+
+            &:hover {
+                background: $base;
+                color: $texthover;
+            }
+            &:selected {
+                background: rgba($text, 0.5);
+                color: $crust;
+                transition: background 0.2s ease-in-out;
+            }
+
+            &.today {
+                background: $text;
+                color: $crust;
+                border-radius: 6px;
+            }
+            &.other-month {
+                color: rgba($text, 0.5);
+            }
+        }
+    }
+}
+
+popover {
+    background: transparent;
+    outline-color: transparent;
+
+    arrow {
+        background: $mantle;
+        //border: 1px solid rgba($blue, 0.5);
+    }
+    contents {
+        background: $base;
+        border-radius: 6px;
+        padding: 0;
+    }
+}
+
+Wireplumber, Battery{
+    background: transparent;
+    color: $text;
+    margin: 0px 0px;
+    button {
+        background: transparent;
+        border-radius: 60px;
+        font-size: 300px;
+        font-weight: bold;
+        
+    }
+
+    popover {
+        background: transparent;
+        font-weight: bold;
+        box {
+            padding: 0px 10px;
+            color: $text;
+            background: $mantle;
+
+            volume {
+                min-width: 40px;
+                padding: 0px 5px;
+            }
+
+        }
+    }
+}
+
+Battery button {
+    color: $green;
+    -gtk-icon-size: 21px;
+}
+Wireplumber button {
+    -gtk-icon-size: 18px;
+}
+
+.battery-level-0-symbolic {
+    color: $red;
+}
+.battery-level-20-symbolic {
+    color: $red;
+}
+.battery-level-40-symbolic {
+    color: $yellow;
+}
+.battery-level-50-symbolic {
+    color: $yellow;
+}
+.battery-level-60-symbolic {
+    color: $green;
+}
+.battery-level-80-symbolic {
+    color: $green;
+}
+.battery-level-90-symbolic {
+    color: $green;
+}
+.battery-level-100-symbolic {
+    color: $green;
+}
+
+scale {
+    background-color: transparent;
+    min-width: 200px;
+
+    trough {
+        background-color: $surface0;
+        border-radius: 5px;
+        min-height: 8px;
+        min-width: 8px;
+    }
+    slider {
+        background-color: transparent;
+        border-radius: 10px;
+        min-height: 16px;
+        min-width: 16px;
+    }
+    highlight {
+        background-color: $text;
+        border-radius: 5px;
+    }
+}
+
+Workspaces {
+    //border: 1px solid rgba($sapphire, 0.5);
+    border-radius: 100px;
+    padding: 0px 10px;
+
+    button {
+        padding:0px;
+        background: $text;
+        transition: all 0.2s ease-in-out;
+        border-radius: 10px;
+        border: 1pt solid transparent;
+        min-width: 10px;
+        min-height: 5px;
+        margin: 11px 3px;
+
+        &:hover {
+            background-color: $text;
+            border-color: $texthover;
+            min-width: 30px;
+        }
+
+        &:active {
+            background-color: $text;
+            border-color: $texthover;
+        }
+        &._1{
+            background-color: $red;
+        }
+        &._2{
+            background-color: $peach;
+        }
+        &._3{
+            background-color: $yellow;
+        }
+        &._4{
+            background-color: $green;
+        }
+
+        &.focused {
+            color: $crust;
+            //background-color: $crust;
+            border-radius: 100px;
+            min-width: 40px;
+            transition: all 0.2s ease-in-out;
+        }
+    }
+
+    label {
+        all: unset;
+    }
+}
+
+ActiveWindow {
+    name {
+        color: $teal;
+        background: $crust;
+        border-radius: 100px;
+        -gtk-icon-size: 20px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+    image {
+        color: $sapphire;
+        padding: 0px 5px;
+        border-radius: 100px;
+        -gtk-icon-size: 20px;
+        -gtk-icon-style: symbolic;
+        -gtk-icon-palette: $text;
+    }
+}
+
+window.Bar {
+    background: transparent;
+    color: $text;
+    font-weight: bold;
+
+    > centerbox {
+        background: $crust;
+        border-radius: 100px;
+        padding: 0px 10px;
+
+    }
+
+
+    button {
+        //border-radius: 100px;
+    }
+    label {
+        color: $text;
+    }
+
+}
