@@ -34,3 +34,10 @@ starship init fish | source
 alias ghc="ghc-9.8.1"
 alias ghc-pkg="ghc-pkg-9.8.1"
 
+
+set -x VULKAN_SDK ~/vulkan/1.4.335.0/x86_64
+set -x PATH $VULKAN_SDK/bin $PATH
+set -x LD_LIBRARY_PATH $VULKAN_SDK/lib:$LD_LIBRARY_PATH
+set -x VK_ADD_LAYER_PATH $VULKAN_SDK/share/vulkan/explicit_layer.d
+set -x PKG_CONFIG_PATH $VULKAN_SDK/share/pkgconfig:$VULKAN_SDK/lib/pkgconfig$PKG_CONFIG_PATH
+

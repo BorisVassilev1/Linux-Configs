@@ -7,6 +7,8 @@ import Wp from "gi://AstalWp"
 import Network from "gi://AstalNetwork"
 import Tray from "gi://AstalTray"
 
+import {SysTray} from "./tray"
+
 function Time({format = "%a %H:%M"}) {
 	const time = Variable<string>("").poll(1000, () =>
 		GLib.DateTime.new_now_local().format(format)!)
@@ -218,13 +220,14 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
 				<ActiveWindow />
 			</box>
 			<box cssName="right">
+				<SysTray />
 				<BatteryWidget />
 				<Wireplumber />
 				<menubutton cssName="Calendar"
 					halign={Gtk.Align.END}
 				>
 					<Time />
-					<popover>
+					<popover cssName="calendar_pop">
 						<Gtk.Calendar />
 					</popover>
 				</menubutton>
