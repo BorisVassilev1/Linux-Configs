@@ -1,32 +1,40 @@
-//import { isMiddleClick, isPrimaryClick, isSecondaryClick, Notify } from '../../../../lib/utils';
-//import options from '../../../../options';
-import AstalTray from 'gi://AstalTray';
-import { bind, Gio, Variable } from 'astal';
-import { Gdk, Gtk } from 'astal/gtk4';
-//import { BarBoxChild } from 'src/lib/types/bar.types';
+import AstalTray from "gi://AstalTray"
+import { createBinding, For, onCleanup } from "ags"
+import { Gtk } from "ags/gtk4"
 
-function SysTray() {
-    const tray = AstalTray.get_default()
+function TrayItem(item: AstalTray.TrayItem) {
+	return <menubutton
+		tooltipText={createBinding(item, "title")}
+		$={self => {
+			const menu = Gtk.PopoverMenu.new_from_model(item.menuModel)
+			menu.set_css_classes(["systray-menu"])
+			self.set_popover(menu)
 
-    return <box cssName="SysTray">
-        {bind(tray, "items").as(items => items.map(item => (
-            <menubutton
-                //tooltipMarkup={bind(item, "tooltipMarkup")}
-				tooltipText={bind(item, "title").as(t => t)}
-				popover={
-					bind(item, "menu_model").as(menuModel => {
-						const menu = Gtk.PopoverMenu.new_from_model(menuModel);
-						menu.set_css_classes(["systray-menu"]);
-						menu.insert_action_group("dbusmenu", item.action_group);
-						print(menu.child);
-						return menu;
-					})
-				}
-			>
-                <image iconName={bind(item, "icon_name")} />
-            </menubutton>
-        )))}
-    </box>
+			const sync = () => {
+				menu.set_menu_model(item.menuModel)
+				menu.insert_action_group("dbusmenu", item.actionGroup)
+			}
+			sync()
+
+			const ids = [
+				item.connect("notify::menu-model", sync),
+				item.connect("notify::action-group", sync),
+			]
+			onCleanup(() => ids.forEach(id => item.disconnect(id)))
+		}}
+	>
+		<image gicon={createBinding(item, "gicon")} />
+	</menubutton>
 }
 
-export { SysTray };
+function SysTray() {
+	const tray = AstalTray.get_default()
+
+	return <box cssName="SysTray">
+		<For each={createBinding(tray, "items")}>
+			{item => TrayItem(item)}
+		</For>
+	</box>
+}
+
+export { SysTray }
